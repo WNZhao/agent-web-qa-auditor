@@ -21,6 +21,7 @@
     "timeoutSecs": {
       "title": "Timeout per request",
       "type": "integer",
+      "description": "Maximum duration for each page or link request.",
       "default": 15,
       "minimum": 3,
       "maximum": 30
