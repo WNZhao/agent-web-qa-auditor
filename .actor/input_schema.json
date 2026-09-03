@@ -1,0 +1,30 @@
+{
+  "title": "Agent Web QA Auditor input",
+  "description": "Checks one public HTTP(S) page. Private networks, credentials, and authenticated pages are intentionally unsupported.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "url": {
+      "title": "Public page URL",
+      "type": "string",
+      "description": "A public HTTP or HTTPS URL to audit.",
+      "editor": "textfield"
+    },
+    "maxLinks": {
+      "title": "Maximum same-origin links to check",
+      "type": "integer",
+      "description": "Set to 0 to skip link checks.",
+      "default": 20,
+      "minimum": 0,
+      "maximum": 50
+    },
+    "timeoutSecs": {
+      "title": "Timeout per request",
+      "type": "integer",
+      "default": 15,
+      "minimum": 3,
+      "maximum": 30
+    }
+  },
+  "required": ["url"]
+}

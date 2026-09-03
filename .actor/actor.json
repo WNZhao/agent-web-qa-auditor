@@ -1,0 +1,10 @@
+{
+  "actorSpecification": 1,
+  "name": "agent-web-qa-auditor",
+  "title": "Agent Web QA Auditor",
+  "description": "Audit a public web page and return deterministic, agent-ready QA findings.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile"
+}
