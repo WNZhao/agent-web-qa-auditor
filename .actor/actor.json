@@ -5,6 +5,8 @@
   "description": "Audit a public web page and return deterministic, agent-ready QA findings.",
   "version": "0.1",
   "buildTag": "latest",
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 512,
   "input": "./input_schema.json",
   "dockerfile": "../Dockerfile"
 }
