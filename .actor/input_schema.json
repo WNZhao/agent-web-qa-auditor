@@ -1,14 +1,29 @@
 {
   "title": "Agent Web QA Auditor input",
-  "description": "Checks one public HTTP(S) page. Private networks, credentials, and authenticated pages are intentionally unsupported.",
+  "description": "Acceptance-check up to 25 public HTTP(S) pages. Private networks, credentials, and authenticated pages are intentionally unsupported.",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
     "url": {
-      "title": "Public page URL",
+      "title": "Single public page URL",
       "type": "string",
-      "description": "A public HTTP or HTTPS URL to audit.",
+      "description": "A public HTTP or HTTPS URL to audit. You can use this field, the URLs list, or both.",
       "editor": "textfield"
+    },
+    "urls": {
+      "title": "Public page URLs",
+      "type": "array",
+      "description": "Optional batch of up to 25 public HTTP or HTTPS URLs.",
+      "editor": "stringList",
+      "default": []
+    },
+    "acceptanceThreshold": {
+      "title": "Minimum passing score",
+      "type": "integer",
+      "description": "A page passes only when its HTTP response is successful and its deterministic QA score reaches this value.",
+      "default": 85,
+      "minimum": 0,
+      "maximum": 100
     },
     "maxLinks": {
       "title": "Maximum same-origin links to check",
@@ -26,6 +41,5 @@
       "minimum": 3,
       "maximum": 30
     }
-  },
-  "required": ["url"]
+  }
 }

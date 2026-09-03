@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { analyzeHtml, assertPublicUrl, isPrivateAddress } from '../src/audit.js';
+import { normalizeUrls, summarize } from '../src/batch.js';
 
 test('detects private IPv4 and IPv6 addresses', () => {
   assert.equal(isPrivateAddress('127.0.0.1'), true);
@@ -24,4 +25,29 @@ test('returns deterministic findings for incomplete HTML', () => {
     'missing_image_alt',
     'missing_viewport',
   ]);
+});
+
+test('normalizes and limits batch input', () => {
+  assert.deepEqual(normalizeUrls({ url: ' https://example.com ', urls: ['https://example.com', 'https://example.org'] }), [
+    'https://example.com',
+    'https://example.org',
+  ]);
+  assert.throws(() => normalizeUrls({}), /Provide/);
+  assert.throws(() => normalizeUrls({ urls: Array.from({ length: 26 }, (_, index) => `https://example.com/${index}`) }), /maximum of 25/);
+});
+
+test('summarizes an acceptance run', () => {
+  assert.deepEqual(summarize([
+    { score: 90, passed: true },
+    { score: 70, passed: false },
+    { passed: false, error: 'timeout' },
+  ], 85), {
+    acceptanceThreshold: 85,
+    total: 3,
+    audited: 2,
+    passed: 1,
+    failed: 2,
+    averageScore: 80,
+    accepted: false,
+  });
 });

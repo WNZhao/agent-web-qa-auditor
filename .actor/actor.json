@@ -2,7 +2,7 @@
   "actorSpecification": 1,
   "name": "agent-web-qa-auditor",
   "title": "Agent Web QA Auditor",
-  "description": "Audit a public web page and return deterministic, agent-ready QA findings.",
+  "description": "Acceptance-check public web pages and return deterministic pass/fail evidence for humans, CI pipelines, and AI agents.",
   "version": "0.1",
   "buildTag": "latest",
   "minMemoryMbytes": 256,

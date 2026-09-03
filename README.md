@@ -1,6 +1,6 @@
 # Agent Web QA Auditor
 
-Deterministic technical QA for a public web page, designed for humans and AI agents that need structured evidence before accepting web work.
+Deterministic acceptance QA for up to 25 public web pages, designed for humans, CI pipelines, and AI agents that need structured evidence before accepting web work.
 
 ## Output
 
@@ -9,6 +9,8 @@ Deterministic technical QA for a public web page, designed for humans and AI age
 - image alt coverage and form/link counts
 - up to 50 same-origin link checks
 - structured findings and a deterministic 0–100 score
+- configurable pass/fail threshold and a run-level acceptance decision
+- batch input with one billable `page-audited` event per successful result
 
 ## Safety boundaries
 
@@ -29,7 +31,8 @@ Example Actor input:
 
 ```json
 {
-  "url": "https://example.com",
+  "urls": ["https://example.com", "https://example.org"],
+  "acceptanceThreshold": 85,
   "maxLinks": 10,
   "timeoutSecs": 15
 }
