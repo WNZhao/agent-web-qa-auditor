@@ -1,0 +1,20 @@
+{
+  "$schema": "https://apify-projects.github.io/actor-json-schemas/output.json?v=0.3",
+  "actorOutputSchemaVersion": 1,
+  "title": "Agent Web QA acceptance results",
+  "description": "Structured page-level evidence plus the run-level acceptance summary.",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Page audit results",
+      "description": "One deterministic QA result per successfully audited public URL.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Acceptance summary",
+      "description": "Overall pass/fail decision, counts, threshold, and average score.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/OUTPUT"
+    }
+  }
+}
