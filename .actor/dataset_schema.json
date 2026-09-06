@@ -1,0 +1,115 @@
+{
+  "actorSpecification": 1,
+  "title": "Web QA audit results",
+  "description": "One deterministic acceptance-check result for each audited public page.",
+  "fields": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "requestedUrl": {
+        "type": "string",
+        "title": "Requested URL",
+        "description": "The public page URL submitted for auditing.",
+        "example": "https://example.com"
+      },
+      "finalUrl": {
+        "type": "string",
+        "title": "Final URL",
+        "description": "The URL reached after safe redirect handling.",
+        "example": "https://example.com/"
+      },
+      "auditedAt": {
+        "type": "string",
+        "title": "Audited at",
+        "description": "ISO 8601 timestamp when the audit began.",
+        "example": "2026-09-07T00:00:00.000Z"
+      },
+      "score": {
+        "type": "number",
+        "title": "QA score",
+        "description": "Deterministic page-quality score from 0 to 100.",
+        "example": 93
+      },
+      "acceptanceThreshold": {
+        "type": "number",
+        "title": "Passing score",
+        "description": "Minimum score required for this run to pass.",
+        "example": 85
+      },
+      "passed": {
+        "type": "boolean",
+        "title": "Passed",
+        "description": "Whether the page returned a successful HTTP response and met the passing score.",
+        "example": true
+      },
+      "durationMs": {
+        "type": "number",
+        "title": "Duration (ms)",
+        "description": "Total audit duration in milliseconds.",
+        "example": 842
+      },
+      "http": {
+        "type": "object",
+        "title": "HTTP result",
+        "description": "Final response status, success flag, and content type."
+      },
+      "metadata": {
+        "type": "object",
+        "title": "Page metadata",
+        "description": "Title, description, canonical URL, and viewport metadata."
+      },
+      "counts": {
+        "type": "object",
+        "title": "Element counts",
+        "description": "Counts of headings, images, forms, and links."
+      },
+      "findings": {
+        "type": "array",
+        "title": "Findings",
+        "description": "Actionable QA findings ordered by detection sequence."
+      },
+      "linkChecks": {
+        "type": "array",
+        "title": "Link checks",
+        "description": "Results of bounded same-origin link checks."
+      },
+      "error": {
+        "type": "string",
+        "title": "Error",
+        "description": "A safe error message when a requested page could not be audited."
+      }
+    },
+    "required": ["requestedUrl", "acceptanceThreshold", "passed"]
+  },
+  "views": {
+    "overview": {
+      "title": "Acceptance results",
+      "description": "The decision and evidence fields most useful before delivery.",
+      "transformation": {
+        "fields": [
+          "passed",
+          "score",
+          "requestedUrl",
+          "finalUrl",
+          "findings",
+          "durationMs",
+          "auditedAt",
+          "error"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "passed": { "label": "Passed", "format": "boolean" },
+          "score": { "label": "Score", "format": "number" },
+          "requestedUrl": { "label": "Requested URL", "format": "link" },
+          "finalUrl": { "label": "Final URL", "format": "link" },
+          "findings": { "label": "Findings", "format": "array" },
+          "durationMs": { "label": "Duration (ms)", "format": "number" },
+          "auditedAt": { "label": "Audited at", "format": "date" },
+          "error": { "label": "Error", "format": "text" }
+        }
+      }
+    }
+  }
+}
