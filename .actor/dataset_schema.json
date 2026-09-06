@@ -3,7 +3,6 @@
   "title": "Web QA audit results",
   "description": "One deterministic acceptance-check result for each audited public page.",
   "fields": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "properties": {
       "requestedUrl": {
